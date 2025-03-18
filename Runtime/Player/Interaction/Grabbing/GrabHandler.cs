@@ -1,8 +1,12 @@
+using System.Collections.Generic;
+using System.Linq;
+using FishNet.Object;
+using FishNet.Object.Synchronizing;
 using UnityEngine;
 
 namespace BIMOS
 {
-    public class GrabHandler : MonoBehaviour
+    public class GrabHandler : NetworkBehaviour
     {
         [SerializeField]
         private Hand _hand;
@@ -16,7 +20,10 @@ namespace BIMOS
         [SerializeField]
         private AudioClip[] _grabSounds, _releaseSounds;
 
-        private Grab _chosenGrab;
+        [SerializeField]
+        private bool ForceGrab = true;
+
+        public readonly SyncVar<Grab> _chosenGrab;
         private AudioSource _audioSource;
 
         private void Awake()
@@ -26,12 +33,13 @@ namespace BIMOS
 
         private void Update()
         {
-            if (_hand.CurrentGrab) //If the hand isn't holding something
+            if (!IsOwner) return;
+            if (_hand.CurrentGrab.Value) //If the hand isn't holding something
                 return;
 
-            _chosenGrab = GetChosenGrab(); //Get the grab the player is hovering over
+            _chosenGrab.Value = GetChosenGrab(); //Get the grab the player is hovering over
 
-            bool grabInRange = _chosenGrab && _hand.HandInputReader.Grip < 0.5f;
+            bool grabInRange = _chosenGrab.Value && _hand.HandInputReader.Grip < 0.5f;
             _hand.HandAnimator.HandPose = grabInRange ? _hoverHandPose : _hand.HandAnimator.DefaultHandPose;
         }
 
@@ -45,7 +53,13 @@ namespace BIMOS
 
         private Grab GetChosenGrab()
         {
-            Collider[] grabColliders = Physics.OverlapBox(_grabBounds.position, _grabBounds.localScale / 2, _grabBounds.rotation, Physics.AllLayers, QueryTriggerInteraction.Collide); //Get all grabs in the grab bounds
+            List<Collider> grabColliders = Physics.OverlapBox(_grabBounds.position, _grabBounds.localScale / 2, _grabBounds.rotation, Physics.AllLayers, QueryTriggerInteraction.Collide).ToList();
+            bool hasHit = Physics.SphereCast(_grabBounds.position, 0.3f, _grabBounds.eulerAngles, out RaycastHit hit, 3f, Physics.AllLayers, QueryTriggerInteraction.Collide);
+            if (hasHit && ForceGrab && _hand.HandInputReader.Trigger > 0.5f && hit.collider.GetComponent<SnapGrab>())
+            {
+                grabColliders.Add(hit.collider);
+            }
+            //Get all grabs in the grab bounds
             float highestRank = 0;
             Grab highestRankGrab = null;
 
@@ -77,21 +91,24 @@ namespace BIMOS
             return highestRankGrab; //Return the grab with the highest rank
         }
 
+
+        [ServerRpc]
         public void AttemptGrab()
         {
-            if (!_chosenGrab)
+            if (!_chosenGrab.Value)
                 return;
 
-            _chosenGrab.OnGrab(_hand);
+            _chosenGrab.Value.OnGrab(_hand);
             _audioSource.PlayOneShot(Utilities.RandomAudioClip(_grabSounds));
         }
 
+        [ServerRpc]
         public void AttemptRelease()
         {
-            if (!_hand.CurrentGrab)
+            if (!_hand.CurrentGrab.Value)
                 return;
 
-            _hand.CurrentGrab.OnRelease(_hand, true);
+            _hand.CurrentGrab.Value.OnRelease(_hand, true);
             _audioSource.PlayOneShot(Utilities.RandomAudioClip(_releaseSounds));
         }
 

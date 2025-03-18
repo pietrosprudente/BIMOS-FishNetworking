@@ -5167,13 +5167,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927b63b619dd2634d926312a58c3ba8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  broadcastInput: 1
   MoveVector: {x: 0, y: 0}
   CrouchInput: 0
   TurnInput: 0
   MoveAction: {fileID: 2329931572188812770, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
   RunAction: {fileID: -6406039945800244612, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
   CrouchAction: {fileID: -5873772996935874777, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
-  JumpAction: {fileID: -1109987746469713061, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
+  JumpAction: {fileID: 6686505857821036382, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
   TurnAction: {fileID: -6922838068034798914, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
 --- !u!1 &3179161603892440961
 GameObject:
@@ -5843,8 +5844,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3de319d97c51fb44a4d581ca3437f99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   HandAnimator: {fileID: 130031883402245643}
-  CurrentGrab: {fileID: 0}
   HandInputReader: {fileID: 4166488413971264423}
   PalmTransform: {fileID: 5949157817692562273}
   PhysicsHand: {fileID: 3921367417498753325}
@@ -5865,6 +5868,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56107103a601e5440a34b881fea2b722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   _hand: {fileID: 1714243675603914674}
   _grabBounds: {fileID: 5804958950668699553}
   _hoverHandPose: {fileID: 11400000, guid: 1e0043c255f7db248a4fb15667cc041b, type: 2}
@@ -5895,6 +5901,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 81dad2a9ce81ce04db34284f30940a72, type: 3}
   - {fileID: 8300000, guid: bc4fe722908dfbe48bd2ea357661d779, type: 3}
   - {fileID: 8300000, guid: c5cbcf9ea6b40b34b855cf309ac32309, type: 3}
+  ForceGrab: 1
+  _chosenGrab: {fileID: 0}
 --- !u!82 &5345365301431071427
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7017,8 +7025,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3de319d97c51fb44a4d581ca3437f99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   HandAnimator: {fileID: 7693680956307982394}
-  CurrentGrab: {fileID: 0}
   HandInputReader: {fileID: 2670558484249623212}
   PalmTransform: {fileID: 5836866895375934951}
   PhysicsHand: {fileID: 3058073986613258275}
@@ -7039,6 +7049,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56107103a601e5440a34b881fea2b722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   _hand: {fileID: 1354081709754906145}
   _grabBounds: {fileID: 839232331233800408}
   _hoverHandPose: {fileID: 11400000, guid: 1e0043c255f7db248a4fb15667cc041b, type: 2}
@@ -7069,6 +7082,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 81dad2a9ce81ce04db34284f30940a72, type: 3}
   - {fileID: 8300000, guid: bc4fe722908dfbe48bd2ea357661d779, type: 3}
   - {fileID: 8300000, guid: c5cbcf9ea6b40b34b855cf309ac32309, type: 3}
+  ForceGrab: 1
+  _chosenGrab: {fileID: 0}
 --- !u!82 &5870694611115305941
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8155,7 +8170,7 @@ GameObject:
   - component: {fileID: 9151466670165665283}
   m_Layer: 0
   m_Name: Palm
-  m_TagString: Untagged
+  m_TagString: Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8295,6 +8310,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffed3ad86871d404d9505fb61434d7e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   LeftHand: {fileID: 0}
   RightHand: {fileID: 0}
   HandPose: {fileID: 0}
@@ -8607,8 +8625,8 @@ MonoBehaviour:
   TriggerTouchedAction: {fileID: -6966224666038705072, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
   GripAction: {fileID: -1119872440682016888, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
   ThumbrestTouchedAction: {fileID: -1112099173356250164, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
-  PrimaryTouchedAction: {fileID: -1368492444629503461, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
-  PrimaryButtonAction: {fileID: 6686505857821036382, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
+  PrimaryTouchedAction: {fileID: 8876732530690189651, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
+  PrimaryButtonAction: {fileID: 3717075757968503819, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
   SecondaryTouchedAction: {fileID: 8876732530690189651, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
   SecondaryButtonAction: {fileID: 3717075757968503819, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
   ThumbstickTouchedAction: {fileID: 187411055613520326, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
@@ -8811,8 +8829,8 @@ MonoBehaviour:
   TriggerTouchedAction: {fileID: -924233728630114068, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
   GripAction: {fileID: -7474602102236965048, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
   ThumbrestTouchedAction: {fileID: -3478115893235113250, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
-  PrimaryTouchedAction: {fileID: -8566359056323481105, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
-  PrimaryButtonAction: {fileID: 2968494588623766867, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
+  PrimaryTouchedAction: {fileID: -7596905765132218364, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
+  PrimaryButtonAction: {fileID: -999353003838249183, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
   SecondaryTouchedAction: {fileID: -7596905765132218364, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
   SecondaryButtonAction: {fileID: -999353003838249183, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
   ThumbstickTouchedAction: {fileID: -4795305183106961705, guid: 0cd47f68cb724f8478ed745999f9d67a, type: 3}
@@ -12522,6 +12540,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55207419af583d144b87aecf6b0dbc80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   LeftHand: {fileID: 0}
   RightHand: {fileID: 0}
   HandPose: {fileID: 0}
@@ -15093,8 +15114,8 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -15833,7 +15854,7 @@ GameObject:
   - component: {fileID: 8199829607600463206}
   m_Layer: 0
   m_Name: Palm
-  m_TagString: Untagged
+  m_TagString: Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

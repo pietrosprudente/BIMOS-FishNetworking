@@ -341,7 +341,7 @@
                     "name": "TriggerButton",
                     "type": "Button",
                     "id": "6a37d425-379f-4853-b429-a0b9796c2bd1",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -482,7 +482,7 @@
                     "name": "",
                     "id": "2456a06a-1dad-4eda-bbf4-70f22176c7e0",
                     "path": "<XRController>{LeftHand}/secondaryButton",
-                    "interactions": "",
+                    "interactions": "Hold(duration=0.7,pressPoint=0.5)",
                     "processors": "",
                     "groups": "",
                     "action": "Menu",

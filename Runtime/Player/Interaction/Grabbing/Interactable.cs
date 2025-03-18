@@ -1,11 +1,11 @@
-using System.Runtime.InteropServices;
+using FishNet.Object;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace BIMOS
 {
     [AddComponentMenu("BIMOS/Grabs/Interactable")]
-    public class Interactable : MonoBehaviour
+    public class Interactable : NetworkBehaviour
     {
         public UnityEvent
             TriggerDownEvent,
@@ -66,6 +66,7 @@ namespace BIMOS
             CheckInputs(out trigger, out primary, out secondary);
             OnPhysicsTick.Invoke(trigger, primary, secondary);
         }
+        [ServerRpc(RequireOwnership = false)]
         public void OnTrigger(bool isButtonDown)
         {
             if (isButtonDown)
@@ -73,6 +74,7 @@ namespace BIMOS
             else
                 TriggerUpEvent.Invoke();
         }
+        [ServerRpc(RequireOwnership = false)]
         public void OnPrimary(bool isButtonDown)
         {
             if (isButtonDown)
@@ -80,6 +82,7 @@ namespace BIMOS
             else
                 PrimaryUpEvent.Invoke();
         }
+        [ServerRpc(RequireOwnership = false)]
         public void OnSecondary(bool isButtonDown)
         {
             if (isButtonDown)
@@ -87,10 +90,12 @@ namespace BIMOS
             else
                 SecondaryUpEvent.Invoke();
         }
+        [ServerRpc(RequireOwnership = false)]
         public void OnGrab()
         {
             GrabEvent.Invoke();
         }
+        [ServerRpc(RequireOwnership = false)]
         public void OnRelease()
         {
             ReleaseEvent.Invoke();

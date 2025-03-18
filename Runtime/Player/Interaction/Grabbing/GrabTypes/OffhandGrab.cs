@@ -11,7 +11,7 @@ namespace BIMOS
             Transform otherPhysicsHand = hand.otherHand.PhysicsHandTransform;
             hand.PhysicsHand.Target = hand.otherHand.PhysicsHand.Target;
 
-            if (!hand.otherHand.CurrentGrab)
+            if (!hand.otherHand.CurrentGrab.Value)
                 return;
 
             Vector3 targetPosition = transform.TransformPoint(hand.PalmTransform.InverseTransformPoint(hand.PhysicsHandTransform.position));
@@ -20,10 +20,9 @@ namespace BIMOS
             hand.PhysicsHand.TargetOffsetPosition = otherPhysicsHand.transform.InverseTransformPoint(targetPosition);
             hand.PhysicsHand.TargetOffsetRotation = Quaternion.Inverse(otherPhysicsHand.transform.rotation) * targetRotation;
         }
-
+        
         public override void DestroyGrabJoint(Hand hand)
         {
-            base.DestroyGrabJoint(hand);
             hand.PhysicsHand.Target = hand.PhysicsHand.Controller;
             hand.PhysicsHand.TargetOffsetPosition = Vector3.zero;
             hand.PhysicsHand.TargetOffsetRotation = Quaternion.identity;

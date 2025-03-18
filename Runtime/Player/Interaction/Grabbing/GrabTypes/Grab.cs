@@ -1,9 +1,11 @@
+using FishNet.Component.Transforming;
+using FishNet.Object;
 using UnityEngine;
 
 namespace BIMOS
 {
     [AddComponentMenu("BIMOS/Grabs/Grab (Basic)")]
-    public class Grab : MonoBehaviour
+    public class Grab : NetworkBehaviour
     {
         [HideInInspector]
         public Hand LeftHand, RightHand;
@@ -50,14 +52,15 @@ namespace BIMOS
         public virtual float CalculateRank(Transform handTransform) //Returned when in player grab range
         {
             if (Collider is MeshCollider)
-                return 1f/1000f;
+                return 1f / 1000f;
 
             return 1f / Vector3.Distance(handTransform.position, Collider.ClosestPoint(handTransform.position)); //Reciprocal of distance from hand to grab
         }
 
+        [ServerRpc(RequireOwnership = false)]
         public virtual void OnGrab(Hand hand) //Triggered when player grabs the grab
         {
-            hand.CurrentGrab = this;
+            hand.CurrentGrab.Value = this;
 
             if (hand.IsLeftHand)
                 LeftHand = hand;
@@ -85,14 +88,17 @@ namespace BIMOS
             GetComponent<Interactable>()?.OnGrab();
         }
 
+        [ServerRpc(RequireOwnership = false)]
         public virtual void IgnoreCollision(Hand hand, bool ignore)
         {
             foreach (Collider collider in _body.GetComponentsInChildren<Collider>())
                 Physics.IgnoreCollision(collider, hand.PhysicsHandCollider, ignore);
         }
 
+        [ServerRpc(RequireOwnership = false)]
         public virtual void AlignHand(Hand hand) { }
 
+        [ServerRpc(RequireOwnership = false)]
         private void CreateGrabJoint(Hand hand)
         {
             FixedJoint grabJoint = hand.PhysicsHandTransform.gameObject.AddComponent<FixedJoint>();
@@ -103,6 +109,7 @@ namespace BIMOS
                 grabJoint.connectedArticulationBody = _articulationBody;
         }
 
+        [ServerRpc(RequireOwnership = false)]
         public void OnRelease(Hand hand, bool toggleGrabs) //Triggered when player releases the grab
         {
             if (!hand)
@@ -126,7 +133,7 @@ namespace BIMOS
 
             GetComponent<Interactable>()?.OnRelease();
 
-            hand.CurrentGrab = null;
+            hand.CurrentGrab.Value = null;
 
             if (hand.IsLeftHand)
                 LeftHand = null;
@@ -136,6 +143,7 @@ namespace BIMOS
             ReleaseEvent?.Invoke();
         }
 
+        [ServerRpc(RequireOwnership = false)]
         public virtual void DestroyGrabJoint(Hand hand)
         {
             if (!hand)

@@ -93,12 +93,12 @@ namespace BIMOS
             GetWebInputs();
 #endif
 
-            Hand.CurrentGrab?.GetComponent<Interactable>()?.Tick();
+            if(Hand.CurrentGrab.Value != null) Hand.CurrentGrab.Value?.GetComponent<Interactable>()?.Tick();
         }
 
         private void FixedUpdate()
         {
-            Hand.CurrentGrab?.GetComponent<Interactable>()?.PhysicsTick();
+            if (Hand.CurrentGrab.Value != null) Hand.CurrentGrab.Value?.GetComponent<Interactable>()?.PhysicsTick();
         }
 
 #if UNITY_WEBGL
@@ -138,7 +138,7 @@ namespace BIMOS
 
         private void OnTriggerButton(InputAction.CallbackContext callbackContext)
         {
-            Grab currentGrab = Hand.CurrentGrab;
+            Grab currentGrab = Hand.CurrentGrab.Value;
 
             if (!currentGrab || callbackContext.started)
                 return;
@@ -171,7 +171,7 @@ namespace BIMOS
         {
             PrimaryButton = callbackContext.performed;
 
-            Grab currentGrab = Hand.CurrentGrab;
+            Grab currentGrab = Hand.CurrentGrab.Value;
 
             if (!currentGrab || callbackContext.started)
                 return;
@@ -189,7 +189,7 @@ namespace BIMOS
         {
             SecondaryButton = callbackContext.performed ? true : false;
 
-            Grab currentGrab = Hand.CurrentGrab;
+            Grab currentGrab = Hand.CurrentGrab.Value;
 
             if (!currentGrab || callbackContext.started)
                 return;

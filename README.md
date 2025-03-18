@@ -1,3 +1,18 @@
+![LogoGithub](BIMOS_Fishnet.png)
+
+BIMOS Fishnet is a unity package for BIMOS which add multiplayer!
+
+Networked BIMOS Rig was made with the mindset of inputs and can use either client side movement (Recommended for Beginners) or server side movement (Recommended for Experts)
+
+Important:
+- You will need fishnet 3+ (turn on prediction if fishnet 4 for a better experience)
+- You will need some updated scripts I commited from my BIMOS fork
+
+Most Important:
+- Have fun :D
+
+Original Bimos Desc Down here by KadenZombie8!
+
 ![LogoGithub](https://github.com/user-attachments/assets/b80a84ae-9d5b-4f6c-b680-1c1b933ac586)
 
 BIMOS was my A-level computer science project. I created it to use in VR games that required realistic physical interaction like <a href="https://store.steampowered.com/app/823500/BONEWORKS/">BONEWORKS</a>.

@@ -1,11 +1,13 @@
+using FishNet.Object;
+using FishNet.Object.Synchronizing;
 using UnityEngine;
 
 namespace BIMOS
 {
-    public class Hand : MonoBehaviour
+    public class Hand : NetworkBehaviour
     {
         public HandAnimator HandAnimator;
-        public Grab CurrentGrab;
+        public readonly SyncVar<Grab> CurrentGrab;
         public HandInputReader HandInputReader;
         public Transform PalmTransform;
         public PhysicsHand PhysicsHand;

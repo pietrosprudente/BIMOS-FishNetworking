@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b96833e8b3c41dc4bbee39e671af3cbb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _addedNetworkObject: {instanceID: 0}
+  - _networkObjectCache: {instanceID: 0}
+  - damageParticles: {fileID: 2028471750338345377, guid: 3fb8720bdc039c341a4bd16acb305a66, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

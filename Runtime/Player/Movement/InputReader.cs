@@ -6,6 +6,7 @@ namespace BIMOS
     public class InputReader : MonoBehaviour
     {
         [Header("Outputs")]
+        public bool broadcastInput = true;
         public Vector2 MoveVector;
         public float CrouchInput, TurnInput;
 
@@ -19,6 +20,7 @@ namespace BIMOS
         private void Awake()
         {
             //Enable all actions
+            broadcastInput = true;
             MoveAction.action.Enable();
             RunAction.action.Enable();
             CrouchAction.action.Enable();
@@ -34,6 +36,7 @@ namespace BIMOS
         private void OnDestroy()
         {
             //Unsubscribe
+            broadcastInput = false;
             RunAction.action.performed -= OnRun;
             JumpAction.action.performed -= OnJumpAnticipate;
             JumpAction.action.canceled -= OnJump;
@@ -54,6 +57,7 @@ namespace BIMOS
 
         private void OnRun(InputAction.CallbackContext context)
         {
+            if (!broadcastInput) return;
             BroadcastMessage("Run");
         }
 
@@ -64,11 +68,13 @@ namespace BIMOS
 
         private void OnJumpAnticipate(InputAction.CallbackContext context)
         {
+            if (!broadcastInput) return;
             BroadcastMessage("AnticipateJump");
         }
 
         private void OnJump(InputAction.CallbackContext context)
         {
+            if (!broadcastInput) return;
             BroadcastMessage("Jump");
         }
 

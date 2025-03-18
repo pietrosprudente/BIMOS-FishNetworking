@@ -260,12 +260,12 @@ namespace BIMOS
                     break;
                 case 1:
                     _cameraModeDisplay.text = "Spectator";
-                    _spectatorCamera.SetActive(true);
+                    //_spectatorCamera.SetActive(true);
                     PlayerPrefs.SetInt("CameraMode", 1);
                     break;
                 case 2:
                     _cameraModeDisplay.text = "Third-person";
-                    _spectatorCamera.SetActive(false);
+                   // _spectatorCamera.SetActive(false);
                     _thirdPersonCamera.transform.position = _cameraTransform.position + _cameraTransform.forward;
                     _thirdPersonCamera.transform.LookAt(_cameraTransform);
                     _thirdPersonCamera.GetComponent<Rigidbody>().isKinematic = false;
