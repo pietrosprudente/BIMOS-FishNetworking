@@ -93,12 +93,12 @@ namespace BIMOS
             GetWebInputs();
 #endif
 
-            if(Hand.CurrentGrab.Value != null) Hand.CurrentGrab.Value?.GetComponent<Interactable>()?.Tick();
+            Hand.CurrentGrab?.Value?.GetComponent<Interactable>()?.Tick();
         }
 
         private void FixedUpdate()
         {
-            if (Hand.CurrentGrab.Value != null) Hand.CurrentGrab.Value?.GetComponent<Interactable>()?.PhysicsTick();
+            Hand.CurrentGrab?.Value?.GetComponent<Interactable>()?.PhysicsTick();
         }
 
 #if UNITY_WEBGL
