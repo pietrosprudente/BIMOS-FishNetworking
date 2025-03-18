@@ -1,6 +1,6 @@
 ![LogoGithub](BIMOS_Fishnet.png)
 
-BIMOS Fishnet is a unity package for BIMOS which add multiplayer!
+BIMOS Fishnet is a BIMOS Patch which adds multiplayer!
 
 Networked BIMOS Rig was made with the mindset of inputs and can use either client side movement (Recommended for Beginners) or server side movement (Recommended for Experts)
 
